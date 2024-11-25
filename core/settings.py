@@ -62,13 +62,16 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'sawa_admin',
     'graphene_django',
-    'django.contrib.postgres'
+    'django.contrib.postgres',
+    'corsheaders'
 ]
 
 
 
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',  # Añade esto al inicio de MIDDLEWARE
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -76,6 +79,39 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",  # Tu URL de desarrollo de Next.js
+    "http://127.0.0.1:3000",
+]
+
+# Configuración alternativa si lo anterior no funciona
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+]
+
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
+
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -105,10 +141,10 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'dbsawa_ku80',
+        'NAME': 'dbsawa_kt1j',
         'USER': 'angel',
-        'PASSWORD': 'FB40KMrJ5YNMySJfm4ud1QVMEBvKaJ28',
-        'HOST': 'dpg-csd5rbl6l47c73evq1e0-a.oregon-postgres.render.com',  # Ejemplo: db.railway.app
+        'PASSWORD': 'tkr9jxqeB8Evq6LvyV7E4lzjPWxXvsrL',
+        'HOST': 'dpg-ct10fl8gph6c73bek62g-a.oregon-postgres.render.com',  # Ejemplo: db.railway.app
         'PORT': '5432',  # Puerto por defecto de PostgreSQL
     }
 }
