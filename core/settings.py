@@ -149,13 +149,45 @@ DATABASES = {
     }
 }
 
+# Configuración más permisiva para desarrollo
+if DEBUG:
+    CORS_ALLOW_ALL_ORIGINS = True
+    CORS_ALLOW_CREDENTIALS = True
+    CORS_ALLOW_METHODS = [
+        'DELETE',
+        'GET',
+        'OPTIONS',
+        'PATCH',
+        'POST',
+        'PUT',
+    ]
+    CORS_ALLOW_HEADERS = [
+        'accept',
+        'accept-encoding',
+        'authorization',
+        'content-type',
+        'dnt',
+        'origin',
+        'user-agent',
+        'x-csrftoken',
+        'x-requested-with',
+    ]
+
 # Configuración adicional recomendada para PostgreSQL
 CONN_MAX_AGE = 60  # Tiempo en segundos para mantener la conexión
 ATOMIC_REQUESTS = True  # Cada request en una transacción
 
+#GRAPHENE = {
+    #'SCHEMA': 'sawa_api_graphql.schema.schema'
+#}
+
+# Configuración de GraphQL
 GRAPHENE = {
-    'SCHEMA': 'sawa_api_graphql.schema.schema'
-}
+    'SCHEMA': 'core.schema.schema',
+    'MIDDLEWARE': [
+        'graphene_django.debug.DjangoDebugMiddleware',
+    ],
+}#
 
 
 # Password validation
